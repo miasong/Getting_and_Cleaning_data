@@ -16,14 +16,14 @@ unzip("CourseProject.zip")
 
 
 # Import training data sets
-trainSubject <- read.table("./data/UCI HAR Dataset/train/subject_train.txt")
-trainY <- read.table("./data/UCI HAR Dataset/train/y_train.txt")
+trainSubject <- read.table("./data/UCI HAR Dataset/train/subject_train.txt", col.names = "subject")
+trainY <- read.table("./data/UCI HAR Dataset/train/y_train.txt", col.names = "activity")
 trainX <- read.table("./data/UCI HAR Dataset/train/X_train.txt")
 
 
 # Import test data sets
-testSubject <- read.table("./data/UCI HAR Dataset/test/subject_test.txt")
-testY <- read.table("./data/UCI HAR Dataset/test/y_test.txt")
+testSubject <- read.table("./data/UCI HAR Dataset/test/subject_test.txt",col.names = "subject")
+testY <- read.table("./data/UCI HAR Dataset/test/y_test.txt",col.names = "subject")
 testX <- read.table("./data/UCI HAR Dataset/test/X_test.txt")
 test <- cbind(testSubject, testY, testX)
 
@@ -36,7 +36,7 @@ Scombined <- rbind(trainSubject, testSubject)
 
 # Extract only the measurements on the mean and standard deviation for each measurement.
 features <- read.table("./data/UCI HAR Dataset/features.txt")
-ftExtracted <- grep("-(mean|std)\\()",features[,2])
+ftExtracted <- grep("(mean|std)\\()",features[,2])
 Xextracted <- Xcombined[,ftExtracted]
 
 
@@ -46,8 +46,6 @@ Ycombined[,1] <- activityLabels[Ycombined[,1],2]
 
 
 # Appropriately labels the data set with descriptive variable names.
-names(Scombined) <- "subject"
-names(Ycombined) <- "activity"
 names(Xextracted) <- features[ftExtracted,2]
 mergedData <- cbind(Scombined,Ycombined,Xextracted)
 
