@@ -1,4 +1,4 @@
-## Getting_and_Cleaning_data
+## Getting and Cleaning data
 ### Coursera Data Science Course Project
 
 This repo contains the followings:
